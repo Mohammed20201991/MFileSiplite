@@ -10,6 +10,7 @@ def split_file():
 
         max_lines = how_many_lines_per_file()
 
+        # ch_dir()
         input_file  = file_dir()
         input_lines = input_file.readlines()
 
@@ -63,13 +64,13 @@ def file_dir():
 #  //-----------------------
 # Create output file
 def create_output_file_dir(num, filename):
-    return open(f"./output_{filename}/split_{num}.txt", "a")
+    return open(f"./data/output_{filename}/split_{num}.txt", "a")
 
 
 #  //-----------------------
 # Create output directory
 def create_output_directory(filename):
-    output_path = f"./output_{filename}"
+    output_path = f"./data/output_{filename}"
     try:
         if os.path.exists(output_path):  # Remove directory if exists
             shutil.rmtree(output_path)
@@ -78,6 +79,13 @@ def create_output_directory(filename):
         print("Error: Failed to create output directory.")
         sys.exit(1)
 
+def ch_dir():
+    # Print the current working directory
+    print("Current working directory: {0}".format(os.getcwd()))
+    # Change the current working directory
+    os.chdir('./data')
+    # Print the current working directory
+    print("Current working directory: {0}".format(os.getcwd()))
 
 #  //-----------------------
 if __name__ == "__main__":
