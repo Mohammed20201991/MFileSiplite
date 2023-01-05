@@ -15,7 +15,7 @@ def how_many_lines_per_file():
 # Retrieve input filename and return file pointer
 def file_dir():
     try:
-        filename = input("Input filename: ")
+        filename =  'C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/brown.txt' # input("Input filename: ")
         return open(filename, 'r')
     except FileNotFoundError:
         print("Error: File not found.")
@@ -25,13 +25,13 @@ def file_dir():
 #  //-----------------------
 # Create output file
 def create_output_file_dir(num, filename):
-    return open(f"./data/output_{filename}/split_{num}.txt", "a")
+    return open(f"./data/split_{num}.txt", "a")
 
 
 #  //-----------------------
 # Create output directory
 def create_output_directory(filename):
-    output_path = f"./data/output_{filename}"
+    output_path = f"./data/"
     try:
         if os.path.exists(output_path):  # Remove directory if exists
             shutil.rmtree(output_path)
