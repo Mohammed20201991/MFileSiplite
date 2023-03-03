@@ -1,11 +1,16 @@
 import pandas as pd
 from pathlib import Path
+import zipfile
+Extract_files = False
+if Extract_files:
+    with zipfile.ZipFile('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images.zip','r') as zip:
+        zip.extractall('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images/')
+
 path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/sample/" 
 path2= "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
-# path2="/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/lines"
-path3 = "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
-# /home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/words/hu
-df = pd.read_csv(f'{path3}labels.txt',
+path4= "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/"
+
+df = pd.read_csv(f'{path4}labels.txt',
                  header=None,
                  delimiter='   ',
                  encoding="utf8",
@@ -19,10 +24,10 @@ print(df.head())
 
 
 def is_dir_exist(filename):
-    # path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/sample/"
-    path2= "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
+    
+    path4= "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/"
     # path_to_file = f'{path2}imgs/'+ filename # df['file_name'][idx] # 'readme.txt'
-    path_to_file = f'{path2}words/hu/'+ filename # df['file_name'][idx] # 'readme.txt'
+    path_to_file = f'{path4}images/en/'+ filename # df['file_name'][idx] # 'readme.txt'
 
     path = Path(path_to_file)
 
@@ -48,6 +53,6 @@ reddit = df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
 import json 
-with open("train.jsonl","w") as f:
+with open("train_en.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
