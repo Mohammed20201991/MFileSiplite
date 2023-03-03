@@ -3,7 +3,9 @@ from pathlib import Path
 path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/sample/" 
 path2= "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
 # path2="/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/lines"
-df = pd.read_csv(f'{path2}labels2.txt',
+path3 = "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
+# /home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/words/hu
+df = pd.read_csv(f'{path3}labels.txt',
                  header=None,
                  delimiter='   ',
                  encoding="utf8",
@@ -20,7 +22,7 @@ def is_dir_exist(filename):
     # path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/sample/"
     path2= "/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/"
     # path_to_file = f'{path2}imgs/'+ filename # df['file_name'][idx] # 'readme.txt'
-    path_to_file = f'{path2}lines/hu/'+ filename # df['file_name'][idx] # 'readme.txt'
+    path_to_file = f'{path2}words/hu/'+ filename # df['file_name'][idx] # 'readme.txt'
 
     path = Path(path_to_file)
 
@@ -46,6 +48,6 @@ reddit = df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
 import json 
-with open("train2.jsonl","w") as f:
+with open("train.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
