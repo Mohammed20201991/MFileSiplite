@@ -1,12 +1,11 @@
 # import required modules
 import os
 import zipfile
-
+import time
 # Declare the function to return all file paths of the particular directory
 def retrieve_file_paths(dirName):
   # setup file paths variable
   filePaths = []
-   
   # Read all directory, subdirectories and file lists
   for root, directories, files in os.walk(dirName):
     for filename in files:
@@ -16,28 +15,28 @@ def retrieve_file_paths(dirName):
   # return all paths
   return filePaths
  
- 
 # Declare the main function
 def main():
 # Assign the name of the directory to zip
-  dir_name = '/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/lines/hu/'
-   
+  dir_name = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/images/'
+  out_dir  = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/'
   # Call the function to retrieve all files and folders of the assigned directory
   filePaths = retrieve_file_paths(dir_name)
   print('filePaths',len(filePaths))
   # printing the list of all files to be zipped
   print('The following list of files will be zipped:')
+  time.sleep(3)
 #   for fileName in filePaths:
 #     print(fileName)
      
   # writing files to a zipfile
-  zip_file = zipfile.ZipFile(f'{dir_name}.zip', 'w')
+  zip_file = zipfile.ZipFile(f'{out_dir}images.zip', 'w')
   with zip_file:
     # writing each file one by one
     for file in filePaths:
       zip_file.write(file)
        
-  print(f'{dir_name}.zip file is created successfully!') 
+  print(f'{out_dir}.zip file is created successfully!') 
 # Call the main function
 if __name__ == "__main__":
   main()
