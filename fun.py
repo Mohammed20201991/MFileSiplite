@@ -2,6 +2,9 @@ import sys
 import os
 import shutil
 sys.path.append('C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/')
+# sys.path.append('C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite')
+out_dir= "C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/data/"
+working_dir ='C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/'
 #  //-----------------------
 # Retrieve and return output file max lines from input
 def how_many_lines_per_file():
@@ -14,8 +17,9 @@ def how_many_lines_per_file():
 #  //-----------------------
 # Retrieve input filename and return file pointer
 def file_dir():
+    
     try:
-        filename =  'G:/hu.txt/hu.txt'# 'C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/brown.txt' # input("Input filename: ")
+        filename = f'{working_dir}Out_split_1.txt'  # 'G:/hu.txt/hu.txt'# 'C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/brown.txt' # input("Input filename: ")
         return open(filename, 'r')
     except FileNotFoundError:
         print("Error: File not found.")
@@ -25,13 +29,13 @@ def file_dir():
 #  //-----------------------
 # Create output file
 def create_output_file_dir(num, filename):
-    return open(f"G:/hu.txt/data/split_{num}.txt", "a")  # ./data/split_{num}.txt
-
+    
+    return open(f"{out_dir}split_{num}.txt", "a")  # ./data/split_{num}.txt
 
 #  //-----------------------
 # Create output directory
 def create_output_directory(filename):
-    output_path = f"G:/hu.txt/data/" # ./data/
+    output_path = f"{out_dir}" # ./data/ G:/hu.txt/data/
     try:
         if os.path.exists(output_path):  # Remove directory if exists
             shutil.rmtree(output_path)
