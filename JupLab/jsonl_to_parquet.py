@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(description="Example script for converting Txt 
 parser.add_argument("input_path",   help="Location of input file (single text file or Single jsonl file )")
 parser.add_argument("out_path", help="Location of output file dir")
 args = parser.parse_args()
+print(args)
 config = vars(args)
 
 input_file  = config['input_path']
@@ -24,7 +25,8 @@ output_dir  = config['out_path']
 
 # ---------------------------------------------------
 # if Iam reading *.txt file 
-txt = False
+txt = False # True
+iam_test = True
 if txt:
     df = pd.read_csv(
                       input_file,
@@ -35,9 +37,17 @@ if txt:
                       )    
     df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
 # if Iam reading *.jsonl file
+if iam_test:    
+    df = pd.read_fwf(input_file, header=None)
+    df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
+    del df[2]
+    # some file names end with jp instead of jpg, let's fix this
+    df['file_name'] = df['file_name'].apply(lambda x: x + 'g' if x.endswith('jp') else x)
+    # df.head()
+
 else: 
-    df = pd.read_json(path_or_buf = input_file, 
-                      lines=True
+    df = pd.read_json(path_or_buf = input_file,
+                      lines=True,
                       )
 # Converting dataframe to parquet 
 df.to_parquet(output_dir)
@@ -46,7 +56,7 @@ df.to_parquet(output_dir)
 # ---------------------------------------------------
 df =pd.read_parquet(output_dir)
 print(df.head())
-print(df['file_name'][0], df['text'][0])
+print(df['file_name'][100], df['text'][100])
 
 # ---------------------------------------------------
 pq_array = pa.parquet.read_table(output_dir, memory_map=True)
