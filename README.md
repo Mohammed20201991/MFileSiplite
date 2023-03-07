@@ -36,3 +36,17 @@ python3 run.py
   <li>link to data (later on cloud) </li>
 </ol> 
 <li> </l>
+
+<h2>File Size small Comparession </h2>
+<p>At this point I am doing small comparession for <a href="https://huggingface.co/datasets/AlhitawiMohammed22/SROIE_2019_text_recognition23/blob/main/test.jsonl"> Test set from SROIE </a>by converting them to differnt data format using <a href = "https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/jsonl_to_parquet.py">script</a> </p>
+<ol>
+  <li> The data format in CSV give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/csv_out.csv">974 KB</a> </li>
+  
+  <li> The data format in jsonl  give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/test.jsonl">1432 KB </a>   </li>
+  <li> The data format in parquet give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/out.parquet.csv">808 KB</a> </li>
+  
+  <li> To Sumup the above comparession parquet format is more efficent way for saving BigData  </li>
+  
+</ol> 
+<li> </l>
+
