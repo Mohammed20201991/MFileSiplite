@@ -3,8 +3,9 @@ import os
 import shutil
 sys.path.append('C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/')
 # sys.path.append('C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite')
-out_dir= "C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/data/"
-working_dir ='C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/'
+out_dir2 = "C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/Out_data/"
+working_dir2 ='C:/Users/Mohammed/Downloads/data/Process_HungarainCorpus/Second_siplit/MFileSiplite/Input_data/'
+
 #  //-----------------------
 # Retrieve and return output file max lines from input
 def how_many_lines_per_file():
@@ -19,7 +20,7 @@ def how_many_lines_per_file():
 def file_dir():
     
     try:
-        filename = f'{working_dir}Out_split_1.txt'  # 'G:/hu.txt/hu.txt'# 'C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/brown.txt' # input("Input filename: ")
+        filename = f'{working_dir2}Out_split_30.txt'  # 'G:/hu.txt/hu.txt'# 'C:/Users/Mohammed/Downloads/data/file_sipliter/filesplit.py/New folder/MFileSiplite/brown.txt' # input("Input filename: ")
         return open(filename, 'r')
     except FileNotFoundError:
         print("Error: File not found.")
@@ -30,7 +31,7 @@ def file_dir():
 # Create output file
 def create_output_file_dir(num, filename):
     
-    return open(f"{out_dir}split_{num}.txt", "a")  # ./data/split_{num}.txt
+    return open(f"{out_dir2}split_{num}.txt", "a")  # ./data/split_{num}.txt
 
 #  //-----------------------
 # Create output directory
@@ -48,6 +49,6 @@ def ch_dir():
     # Print the current working directory
     print("Current working directory: {0}".format(os.getcwd()))
     # Change the current working directory
-    os.chdir('./data')
+    os.chdir('./Out_data')
     # Print the current working directory
     print("Current working directory: {0}".format(os.getcwd()))
