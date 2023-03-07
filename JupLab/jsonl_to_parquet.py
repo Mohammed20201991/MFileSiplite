@@ -1,48 +1,29 @@
 # https://arrow.apache.org/docs/python/parquet.html#reading-and-writing-single-files
 # https://www.youtube.com/watch?v=kYghFTfDXnU&t=10s
+# for vitulizing results 
+# https://www.parquet-viewer.com/
+# for extra reading 
+# https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_parquet.html
+# https://gist.github.com/jiffyclub/905bf5e8bf17ec59ab8f#file-hdf_to_parquet-py
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 import pyarrow.parquet as pq
-import numpy as np
 import pandas as pd
 import pyarrow as pa
+import argparse
 
-# df = pd.DataFrame({'one': [-1, np.nan, 2.5],
-#                    'two': ['foo', 'bar', 'baz'],
-#                    'three': [True, False, True]},
-#                    index=list('abc'))
-# table = pa.Table.from_pandas(df)
+parser = argparse.ArgumentParser(description="Example script for converting Txt or Jsonl file format to Parquet",
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("input_path",   help="Location of input file (single text file or Single jsonl file )")
+parser.add_argument("out_path", help="Location of output file dir")
+args = parser.parse_args()
+config = vars(args)
 
-# pq.write_table(table, 'example.parquet')
-
-# table2 = pq.read_table('example.parquet')
-# print(table2)
-
-# m = table2.to_pandas()
-# print("m" ,m.head())
-# print(table2.to_pandas())
-
-# n = pq.read_table('example.parquet', columns=['one', 'three'])
-# print("n", type(n), n)
-# x = pq.read_pandas('example.parquet', columns=['two']).to_pandas()
-# print(x.head())
-
-
-# pq_array = pa.parquet.read_table("example.parquet", memory_map=True)
-# print("RSS: {}MB".format(pa.total_allocated_bytes() >> 20))
-
-# pq_array = pa.parquet.read_table("example.parquet", memory_map=False)
-# print("RSS: {}MB".format(pa.total_allocated_bytes() >> 20))
-
-# # Inspecting the Parquet File Metadata
-# parquet_file = pq.ParquetFile('example.parquet')
-# print(parquet_file)
-# metadata = parquet_file.metadata
-# print(metadata)
+input_file  = config['input_path']
+output_dir  = config['out_path']
 
 # ---------------------------------------------------
 # if Iam reading *.txt file 
-import pandas as pd
-input_file = '/home/ngyongyossy/mohammad/Data/SROIE_2019_text_recognition/test.jsonl'
-out_file = 'out.parquet'
 txt = False
 if txt:
     df = pd.read_csv(
@@ -53,25 +34,29 @@ if txt:
                       engine='python'
                       )    
     df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
+# if Iam reading *.jsonl file
 else: 
-    df = pd.read_json(path_or_buf = input_file, lines=True)
-
-df.to_parquet(out_file)
-# for vitulizing results 
-# https://www.parquet-viewer.com/
-# for extra reading 
-# https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_parquet.html
-# https://gist.github.com/jiffyclub/905bf5e8bf17ec59ab8f#file-hdf_to_parquet-py
+    df = pd.read_json(path_or_buf = input_file, 
+                      lines=True
+                      )
+# Converting dataframe to parquet 
+df.to_parquet(output_dir)
 # Read Parquet file in python 
-parquet_file= r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/out.parquet"
-df =pd.read_parquet(parquet_file)
+
+# ---------------------------------------------------
+df =pd.read_parquet(output_dir)
 print(df.head())
-
-# # write without compression 
-# csv_out = r"csv_out.csv"
-# df.to_csv(csv_out,index=False,sep='\t')
-
-# # write with gzip comparssion
-# comparessed_csv= r"out.csv.gz"
-# df.to_csv(comparessed_csv, index=False,compression='gzip')
 print(df['file_name'][0], df['text'][0])
+
+# ---------------------------------------------------
+pq_array = pa.parquet.read_table(output_dir, memory_map=True)
+print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
+pq_array = pa.parquet.read_table(output_dir, memory_map=False)
+print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
+
+# ---------------------------------------------------
+# Inspecting the Parquet File Metadata
+parquet_file = pq.ParquetFile(output_dir)
+print(parquet_file)
+metadata = parquet_file.metadata
+print(metadata)
