@@ -35,7 +35,7 @@ python3 run.py
   <li> Big data text (Corpus) siplited to small text files each one with 5000000 lines </li>
   <li>link to data (later on cloud) </li>
 </ol> 
-<li> </l>
+
 
 <h2>File Size small Comparession </h2>
 <p>At this point I am doing small comparession for <a href="https://huggingface.co/datasets/AlhitawiMohammed22/SROIE_2019_text_recognition23/blob/main/test.jsonl"> Test set from SROIE </a>by converting them to differnt data format using <a href = "https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/jsonl_to_parquet.py">script</a> </p>
@@ -48,5 +48,16 @@ python3 run.py
   <li> To Sumup the above comparession parquet format is more efficent way for saving BigData  </li>
   
 </ol> 
-<li> </l>
+
+<h2>How to convert Text & Jsonl file and Pandas to Parquet format </h2>
+
+~~~bash
+!cd MFileSiplite/JupLab/
+python3 jsonl_to_parquet.py path/to/input/file  path/to/output/file
+~~~
+An Example: 
+
+~~~bash
+python3 jsonl_to_parquet.py /home/ngyongyossy/mohammad/Data/SROIE_2019_text_recognition/test.jsonl  /home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/out.parquet
+~~~
 
