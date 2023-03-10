@@ -6,7 +6,7 @@ import pyarrow as pa
 import argparse
 import json
 
-LOAD_LAIA = False 
+Transcription = True 
 # --------------------------------------
 parser = argparse.ArgumentParser(description="Example script for converting Txt or Jsonl file format to Parquet Hungarain Laia as ex.",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -46,23 +46,9 @@ def load_iam(d) -> pd.DataFrame:
     df = df[['file_name', 'text']]
     return df
 #-----------------------------------------------------
-def load_laia(d) -> pd.DataFrame:
-    data = []
-    print(d)
-    with open(d) as infile:
-        for line in infile:
-            file_name, _, _, _, _, _, _, _, text = line.strip().split(' ')
-            data.append((file_name, clean_text(text)))
-
-    df = pd.DataFrame(data, columns=['file_name', 'text'])
-    df.rename(columns={0: 'file_name', 8: 'text'}, inplace=True)
-    df['file_name'] = df['file_name'].apply(lambda x: x + '.jpg')
-    df = df[['file_name', 'text']]
-    return df
 #-----------------------------------------------------
-#-----------------------------------------------------
-if LOAD_LAIA:     
-    df = load_laia(f'{working_dir}word_labels.txt') 
+if Transcription:     
+    df = load_iam(f'{working_dir}transcription.txt') 
 else:     
     df = load_iam(f'{working_dir}word_labels.txt') 
 
@@ -70,10 +56,19 @@ print(df.head(10))
 print('\n ',df['file_name'][3] ,df['text'][3])
 print(df.tail(4))
 
-# ------------------------------------------------------
-reddit = df.to_dict(orient= "records")
-print(type(reddit) , len(reddit))
-# we have list of dict[{},{},{}]
-with open(f"{working_dir}train.jsonl","w") as f:
-    for line in reddit:
-        f.write(json.dumps(line,ensure_ascii=False) + "\n")
+# -----------------------------------------------------
+if Transcription:
+    reddit = df.to_dict(orient= "records")
+    print(type(reddit) , len(reddit))
+    # we have list of dict[{},{},{}]
+    with open(f"{working_dir}transcription.jsonl","w") as f: 
+        for line in reddit:
+            f.write(json.dumps(line,ensure_ascii=False) + "\n")
+
+else:
+    reddit = df.to_dict(orient= "records")
+    print(type(reddit) , len(reddit))
+    # we have list of dict[{},{},{}]
+    with open(f"{working_dir}words.jsonl","w") as f: 
+        for line in reddit:
+            f.write(json.dumps(line,ensure_ascii=False) + "\n") 
