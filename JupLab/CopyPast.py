@@ -14,7 +14,7 @@ import time
 # shutil.move(source, destination, copy_function = copy2)
 # Move All Files From A Directory
 
-source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/HuNames/images/"
+source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/hu_words_v1/images/"
 destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/images/"
 # print(os.listdir(source_folder))
 
@@ -37,4 +37,4 @@ for file_name in os.listdir(source_folder):
 # Move Files Matching a Pattern (Wildcard)
 # glob.glob(pathname, *, recursive=False)
 time.sleep(5)
-print(f'number of images after Copied {len(os.listdir(destination_folder))}  fiels: to {source_folder}   dir')
+print(f'number of images after Copied {len(os.listdir(destination_folder))}  fiels: to {destination_folder}   dir')
