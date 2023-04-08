@@ -5,35 +5,24 @@ parser = argparse.ArgumentParser(description="Example script for converting Txt 
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("input_path1",   help="Location of input file (single text file or Single jsonl file )")
 parser.add_argument("input_path2",   help="Location of input file (single text file or Single jsonl file )")
+parser.add_argument("input_path3",   help="Location of input file (single text file or Single jsonl file )")
 args = parser.parse_args()
 print(args)
 config = vars(args)
 
-input_file1  = config['input_path1']   # path to df1
-input_file2  = config['input_path2']   # path to df2 
-# read df1 
-# read df2
-# put all df(s) in list frame= [df1,df2]
-# use concat method 
+input_file1  = config['input_path1']
+input_file2  = config['input_path2']
+input_file3  = config['input_path3']
 
-
-def load_jsonl_1():
+def load_jsonl(path):
     return pd.read_json(
-                        path_or_buf = f'{input_file1}train.jsonl',
+                        path_or_buf = f'{path}train.jsonl',
                         lines=True) 
-df1 = load_jsonl_1()
-print(df1.head(2))
 
+dir_   = [input_file1,input_file2,input_file3]
+frames = [load_jsonl(path) for path in dir_]
 
-def load_jsonl_2():
-    return pd.read_json(
-                        path_or_buf = f'{input_file2}train.jsonl',
-                        lines=True) 
-df2 = load_jsonl_2()
-print(df2.head(2))
-
-frames= [df1,df2]
+print(len(frames))
 resulting_df = pd.concat(frames)
-
 print(resulting_df.head())
 print(resulting_df.tail())
