@@ -4,28 +4,28 @@ import zipfile
 import time
 import json
 Extract_files = False
-CLEAN_TEXT = True
+CLEAN_TEXT = False 
 if Extract_files:
     with zipfile.ZipFile('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images.zip','r') as zip:
         zip.extractall('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images/')
 
  
-path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/"
+path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/"
 
 if CLEAN_TEXT:
     import re
-    with open(f'{path}labels_tab_remove.txt', encoding='utf-8') as fp1:
-     with open(f'{path}labels_clean1.txt', mode='w', encoding='utf-8') as fp2:
+    with open(f'{path}labels.txt', encoding='utf-8') as fp1:
+     with open(f'{path}labels_clean.txt', mode='w', encoding='utf-8') as fp2:
         for row in fp1:
             if row.strip():
                 file_text, text = re.split(r'\s{3}', row, maxsplit=1)
                 text = re.sub(r'\s+', ' ', text)
                 fp2.write(f"{file_text}{' ':4}{text}\n")
+    print('File has cleaned ::')
 
-print('File has cleaned ::')
 time.sleep(5)
 
-df = pd.read_csv(f'{path}labels_clean1.txt', 
+df = pd.read_csv(f'{path}labels.txt', # labels_clean.txt
                  header=None,
                  delimiter='   ',
                  encoding="utf8",
@@ -37,8 +37,7 @@ print(df.head())
 print(len(df))
 
 def is_dir_exist(filename): 
-    path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/"
-    # path_to_file = f'{path2}imgs/'+ filename # df['file_name'][idx] # 'readme.txt'
+    path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/"
     path_to_file = f'{path}images/'+ filename # df['file_name'][idx] # 'readme.txt'
     path = Path(path_to_file)
     return path.is_file() 
@@ -62,6 +61,7 @@ print("Data frame after processed" , df.head(10))
 reddit = df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
-with open(f"{path}train1.jsonl","w") as f:
+with open(f"{path}train.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
+print('ok')
