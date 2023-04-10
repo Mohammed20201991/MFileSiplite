@@ -6,22 +6,22 @@ from pathlib import Path
 from os import rename
 import time 
 
-path ="/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v1/100_000_sample_v1.jsonl"
+path ="/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v3/100_000_sample_v3.jsonl"
 df = pd.read_json(path_or_buf=path, lines=True,)
 print(df.head())
 # make a duplicate dataframe
 ndf = df.copy(deep=True)
 for i in range(len(ndf)):
     og_fn = ndf['file_name'][i]
-    new_fn = 'lines_hu_v1_{fn}'.format(fn=og_fn)
+    new_fn = 'lines_hu_v3_{fn}'.format(fn=og_fn)
     ndf.loc[i, ['file_name']] = [new_fn]
 
 # create output directory
-call(['mkdir lines_hu_v1_100000'], shell=True)
+call(['mkdir lines_hu_v3_100000'], shell=True)
 
 # copy original imgs folder into out_folder
-src = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v1/images/'
-dst = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v1_100000/'
+src = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v3/images/'
+dst = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v3_100000/'
 cmd = 'cp -a {s} {d}'.format(s=src, d=dst)
 call([cmd, src, dst], shell=True)
 print("copy done fro src to dst ")
@@ -29,6 +29,9 @@ print("copy done fro src to dst ")
 with open(f'{dst}train.jsonl', 'w',encoding='utf-8') as f:
     f.write(ndf.to_json(orient='records', lines=True, force_ascii=False))
 
+print("new json lines file generated ")
 call(['pwd'], shell=True)
-cmd = 'for f in *.jpg; do mv "$f" "lines_hu_v1_$f"; done'
+cmd = 'for f in *.jpg; do mv "$f" "lines_hu_v3_$f"; done'
 call([cmd], shell=True, cwd=f'{dst}')
+
+print("done done  ")
