@@ -8,8 +8,8 @@ import os
 # ['/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/test/*.jpg']
 # images = glob.glob(random.choice(file_path_type))
 # random_image = random.choice(images)
-source_folder      = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/'
-destination_folder = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v4/"
+source_folder      = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v3/'
+destination_folder = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/v3/"
 
 def load_jsonl(path):
     return pd.read_json(
@@ -27,7 +27,7 @@ time.sleep(3)
 reddit = new_df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
-with open(f"{destination_folder}50_000_sample_v4.jsonl","w") as f:
+with open(f"{destination_folder}100_000_sample_v3.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
 
@@ -46,7 +46,7 @@ def make_copy(file_name):
 #                         path_or_buf = f'{destination_folder}sample_v1.jsonl',
 #                         lines=True) 
 
-new_df = load_jsonl(f'{destination_folder}50_000_sample_v4.jsonl')
+new_df = load_jsonl(f'{destination_folder}100_000_sample_v3.jsonl')
 print(new_df.head(10))
 # print(new_df['file_name'].iloc[:-1])
 # print(new_df.index[-1])
