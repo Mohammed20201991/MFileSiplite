@@ -14,13 +14,13 @@ import time
 # shutil.move(source, destination, copy_function = copy2)
 # Move All Files From A Directory
 
-source_folder = r"/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/testPrintedFonts/"
-destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/images/"
+source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/Brown/brown_en_v5_1/images/"
+destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/images/"
 # print(os.listdir(source_folder))
 
-print('The data moving has started :')
-print(f'We will Move {len(os.listdir(source_folder))} fiels: from {source_folder}   dir')
-print(f'We Moving ... {len(os.listdir(source_folder))}fiels:')
+print('The data Coping has started :')
+print(f'We will Copy {len(os.listdir(source_folder))} fiels: from {source_folder}   dir')
+print(f'We Coping ... {len(os.listdir(source_folder))}fiels:')
 time.sleep(3)
 # fetch all files
 # i = 0
@@ -30,11 +30,11 @@ for file_name in os.listdir(source_folder):
     destination = destination_folder + file_name  # for give uinqe names  str(i) +
     # move only files (cut)
     if os.path.isfile(source):
-        shutil.move(source, destination) # ctrl + X
-        # shutil.copyfile(source, destination) # CTRL + C
+        # shutil.move(source, destination) # ctrl + X
+        shutil.copyfile(source, destination) # CTRL + C
         # print('Moved:', file_name)
     # i = i+1
 # Move Files Matching a Pattern (Wildcard)
 # glob.glob(pathname, *, recursive=False)
 time.sleep(5)
-print(f'number of images after Movied {len(os.listdir(destination_folder))}  fiels: to {destination_folder}   dir')
+print(f'number of images after Copied {len(os.listdir(destination_folder))}  fiels: to {destination_folder}   dir')
