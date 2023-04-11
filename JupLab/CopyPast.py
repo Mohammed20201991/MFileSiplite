@@ -15,7 +15,7 @@ import time
 # Move All Files From A Directory
 
 source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/MixedData/images/"
-destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/images/"
+destination_folder = r"/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/v7/"
 # print(os.listdir(source_folder))
 
 print('The data Coping has started :')
@@ -30,8 +30,8 @@ for file_name in os.listdir(source_folder):
     destination = destination_folder + file_name  # for give uinqe names  str(i) +
     # move only files (cut)
     if os.path.isfile(source):
-        # shutil.move(source, destination) # ctrl + X
-        shutil.copyfile(source, destination) # CTRL + C
+        shutil.move(source, destination) # ctrl + X
+        # shutil.copyfile(source, destination) # CTRL + C
         # print('Moved:', file_name)
     # i = i+1
 # Move Files Matching a Pattern (Wildcard)
