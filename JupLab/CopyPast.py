@@ -14,7 +14,7 @@ import time
 # shutil.move(source, destination, copy_function = copy2)
 # Move All Files From A Directory
 
-source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/Brown/brown_en_v5_1/images/"
+source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/MixedData/images/"
 destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/images/"
 # print(os.listdir(source_folder))
 
