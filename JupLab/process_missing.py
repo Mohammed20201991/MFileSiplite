@@ -10,7 +10,7 @@ if Extract_files:
         zip.extractall('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images/')
 
  
-path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/"
+path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/"
 
 if CLEAN_TEXT:
     import re
@@ -23,21 +23,26 @@ if CLEAN_TEXT:
                 fp2.write(f"{file_text}{' ':4}{text}\n")
     print('File has cleaned ::')
 
-time.sleep(5)
+# time.sleep(5)
 
-df = pd.read_csv(f'{path}labels.txt', # labels_clean.txt
-                 header=None,
-                 delimiter='   ',
-                 encoding="utf8",
-                 error_bad_lines=False,
-                 engine='python',
-                 ) 
-df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
+# df = pd.read_csv(f'{path}labels.txt', # labels_clean.txt
+#                  header=None,
+#                  delimiter='   ',
+#                  encoding="utf8",
+#                  error_bad_lines=False,
+#                  engine='python',
+#                  ) 
+# df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
+def load_jsonl(path):
+    return pd.read_json(
+                        path_or_buf = f'{path}all_train_v2.jsonl',
+                        lines=True) 
+df = load_jsonl(path)
 print(df.head())
 print(len(df))
 
 def is_dir_exist(filename): 
-    path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/"
+    path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/"
     path_to_file = f'{path}images/'+ filename # df['file_name'][idx] # 'readme.txt'
     path = Path(path_to_file)
     return path.is_file() 
@@ -58,10 +63,11 @@ for i in list_fn:
 time.sleep(3)
 print("Data frame after processed" , df.head(10))
 
+# save resulting df 
 reddit = df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
-with open(f"{path}train.jsonl","w") as f:
+with open(f"{path}all_train_v2_1.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
 print('ok')
