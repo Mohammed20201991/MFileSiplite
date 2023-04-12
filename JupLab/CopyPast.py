@@ -14,8 +14,8 @@ import time
 # shutil.move(source, destination, copy_function = copy2)
 # Move All Files From A Directory
 
-source_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/MixedData/images/"
-destination_folder = r"/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/v7/"
+source_folder = r"/home/ngyongyossy/mohammad/trdghm/TextRecognitionDataGeneratorHuMu23/trdg/out/v7/"
+destination_folder = r"/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v7/images/"
 # print(os.listdir(source_folder))
 
 print('The data Coping has started :')
