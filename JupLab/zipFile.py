@@ -18,8 +18,8 @@ def retrieve_file_paths(dirName):
 # Declare the main function
 def main():
 # Assign the name of the directory to zip
-  dir_name = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/images/'
-  out_dir  = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v4/'
+  dir_name = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/images/'
+  out_dir = '/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v5/'
   # Call the function to retrieve all files and folders of the assigned directory
   filePaths = retrieve_file_paths(dir_name)
   print('filePaths',len(filePaths))
@@ -36,7 +36,7 @@ def main():
     for file in filePaths:
       zip_file.write(file)
        
-  print(f'{out_dir}.zip file is created successfully!') 
+  print(f'{out_dir}images.zip file is created successfully!') 
 # Call the main function
 if __name__ == "__main__":
   main()
