@@ -5,14 +5,11 @@
 # for extra reading 
 # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_parquet.html
 # https://gist.github.com/jiffyclub/905bf5e8bf17ec59ab8f#file-hdf_to_parquet-py
-import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 import pyarrow.parquet as pq
 import pandas as pd
 import pyarrow as pa
-import argparse
-import json
-import time
+import argparse , json , time
+
 parser = argparse.ArgumentParser(description="Example script for converting Txt or Jsonl file format to Parquet",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("input_path",   help="Location of input file (single text file or Single jsonl file )")
@@ -26,7 +23,7 @@ output_dir  = config['out_path']
 
 # ---------------------------------------------------
 # if I am reading *.txt file 
-txt      = True 
+txt      = False 
 iam_test = False
 if txt:
     df = pd.read_csv(
@@ -48,37 +45,37 @@ if iam_test:
     df['file_name'] = df['file_name'].apply(lambda x: x + 'g' if x.endswith('jp') else x)
     # df.head()
 
-# else: 
-#     df = pd.read_json(path_or_buf = input_file,
-#                       lines=True,
-#                       )
+else: 
+    df = pd.read_json(path_or_buf = input_file,
+                      lines=True,
+                      )
 print(df.head())
 print(df['file_name'][1], df['text'][1])
 # Converting dataframe to parquet 
-df.to_parquet(f'{output_dir}train.parquet') # train
+df.to_parquet(f'{output_dir}labels.parquet') 
 # Read Parquet file in python 
 time.sleep(3)
 # ---------------------------------------------------
-df_parquet = pd.read_parquet(f'{output_dir}train.parquet') # train
+df_parquet = pd.read_parquet(f'{output_dir}labels.parquet') 
 print(df_parquet.head())
 print(df_parquet['file_name'][10], df_parquet['text'][10])
 # ---------------------------------------------------
-pq_array = pa.parquet.read_table(f'{output_dir}train.parquet', memory_map=True)  # train
+pq_array = pa.parquet.read_table(f'{output_dir}labels.parquet', memory_map=True)  
 print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
-pq_array = pa.parquet.read_table(f'{output_dir}train.parquet', memory_map=False) # train
+pq_array = pa.parquet.read_table(f'{output_dir}labels.parquet', memory_map=False) 
 print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
 # ---------------------------------------------------
 # Inspecting the Parquet File Metadata
-parquet_file = pq.ParquetFile(f'{output_dir}train.parquet') # train
+parquet_file = pq.ParquetFile(f'{output_dir}labels.parquet') 
 print(parquet_file)
 metadata = parquet_file.metadata
 print(metadata)
 #---------------------------------------------------
 # Converting dataframe to jsonl
-time.sleep(3)
-reddit = df.to_dict(orient= "records")
-print(type(reddit) , len(reddit))
-# we have list of dict[{},{},{}]
-with open(f"{output_dir}train.jsonl","w") as f:
-    for line in reddit:
-        f.write(json.dumps(line,ensure_ascii=False) + "\n")
+# time.sleep(3)
+# reddit = df.to_dict(orient= "records")
+# print(type(reddit) , len(reddit))
+# # we have list of dict[{},{},{}]
+# with open(f"{output_dir}train.jsonl","w") as f:
+#     for line in reddit:
+#         f.write(json.dumps(line,ensure_ascii=False) + "\n")
