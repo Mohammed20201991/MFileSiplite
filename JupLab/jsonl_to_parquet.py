@@ -52,21 +52,21 @@ else:
 print(df.head())
 print(df['file_name'][1], df['text'][1])
 # Converting dataframe to parquet 
-df.to_parquet(f'{output_dir}labels.parquet') 
+df.to_parquet(f'{output_dir}test.parquet') 
 # Read Parquet file in python 
 time.sleep(3)
 # ---------------------------------------------------
-df_parquet = pd.read_parquet(f'{output_dir}labels.parquet') 
+df_parquet = pd.read_parquet(f'{output_dir}test.parquet') 
 print(df_parquet.head())
 print(df_parquet['file_name'][10], df_parquet['text'][10])
 # ---------------------------------------------------
-pq_array = pa.parquet.read_table(f'{output_dir}labels.parquet', memory_map=True)  
+pq_array = pa.parquet.read_table(f'{output_dir}test.parquet', memory_map=True)  
 print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
-pq_array = pa.parquet.read_table(f'{output_dir}labels.parquet', memory_map=False) 
+pq_array = pa.parquet.read_table(f'{output_dir}test.parquet', memory_map=False) 
 print(f"RSS: {pa.total_allocated_bytes() >> 20}MB")
 # ---------------------------------------------------
 # Inspecting the Parquet File Metadata
-parquet_file = pq.ParquetFile(f'{output_dir}labels.parquet') 
+parquet_file = pq.ParquetFile(f'{output_dir}test.parquet') 
 print(parquet_file)
 metadata = parquet_file.metadata
 print(metadata)
