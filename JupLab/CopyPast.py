@@ -3,9 +3,9 @@ import os
 import time 
 # for moving single file 
 # capture source file 
-source = r'/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v3.zip'
+source = r'/home/ngyongyossy/mohammad/Data/lines_hu_v2_1/images.zip'
 # capture destnation file 
-destination = r'/data/aramis/ngyongyossy/Data/'
+destination = r'/data/aramis/ngyongyossy/Data/lines_hu_v2_1'
 
 # shutil.copyfile(original, target)
 
