@@ -10,7 +10,7 @@ if Extract_files:
         zip.extractall('/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/en_words/images/')
 
  
-path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/"
+path = "/home/ngyongyossy/mohammad/Data/DH-Lab_aug/"
 
 if CLEAN_TEXT:
     import re
@@ -35,21 +35,19 @@ if CLEAN_TEXT:
 # df.rename(columns={0: "file_name", 1: "text"}, inplace=True)
 def load_jsonl(path):
     return pd.read_json(
-                        path_or_buf = f'{path}all_train_v2.jsonl',
+                        path_or_buf = f'{path}all_labels.jsonl',
                         lines=True) 
 df = load_jsonl(path)
 print(df.head())
 print(len(df))
-
 def is_dir_exist(filename): 
-    path = "/home/ngyongyossy/mohammad/OCR_HU_Tra2022/GPT-2_Parallel/process/lines_hu_v2/"
+    path = "/home/ngyongyossy/mohammad/Data/DH-Lab_aug/"
     path_to_file = f'{path}images/'+ filename # df['file_name'][idx] # 'readme.txt'
     path = Path(path_to_file)
     return path.is_file() 
 
 def drop_row(idx):    
     return df.drop(df.index[idx]) 
-
 list_fn = [
             df['file_name'][idx]
             for idx in range(len(df))
@@ -67,7 +65,7 @@ print("Data frame after processed" , df.head(10))
 reddit = df.to_dict(orient= "records")
 print(type(reddit) , len(reddit))
 # we have list of dict[{},{},{}]
-with open(f"{path}all_train_v2_1.jsonl","w") as f:
+with open(f"{path}all__labels.jsonl","w") as f:
     for line in reddit:
         f.write(json.dumps(line,ensure_ascii=False) + "\n")
 print('ok')
