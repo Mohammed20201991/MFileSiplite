@@ -14,12 +14,11 @@ def retrieve_file_paths(dirName):
         filePaths.append(filePath)      
   # return all paths
   return filePaths
- 
 # Declare the main function
 def main():
 # Assign the name of the directory to zip
-  dir_name = '/home/ngyongyossy/mohammad/Data/lines_hu_v2_1/images/'
-  out_dir = '/home/ngyongyossy/mohammad/Data/lines_hu_v2_1/'
+  dir_name = '/home/ngyongyossy/mohammad/Data/lines_hu_v4/test/images/'
+  out_dir = '/home/ngyongyossy/mohammad/Data/lines_hu_v4/test/'
   # Call the function to retrieve all files and folders of the assigned directory
   filePaths = retrieve_file_paths(dir_name)
   print('filePaths',len(filePaths))
@@ -27,15 +26,13 @@ def main():
   print('The following list of files will be zipped:')
   time.sleep(3)
 #   for fileName in filePaths:
-#     print(fileName)
-     
+#     print(fileName)  
   # writing files to a zipfile
   zip_file = zipfile.ZipFile(f'{out_dir}images.zip', 'w')
   with zip_file:
     # writing each file one by one
     for file in filePaths:
-      zip_file.write(file)
-       
+      zip_file.write(file)    
   print(f'{out_dir}images.zip file is created successfully!') 
 # Call the main function
 if __name__ == "__main__":
