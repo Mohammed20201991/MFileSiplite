@@ -1,4 +1,5 @@
 # MFileSiplite
+Here you can find diffrent processing scripts used to preaper data for Handwritten Text Recogntion (HTR) task for Hungarain languge. Project could be found on - <a href="https://github.com/Mohammed20201991/OCR_HU_Tra2022">OCR_HU_Tra2022</a>
 
 How to run it ? 
 ~~~bash  
@@ -21,7 +22,6 @@ python3 run.py
 
 <hr> 
 <h2> Data Used : </h2>
-
 <ul>
   <li>Brown Corpus </li>
   <li>
@@ -29,30 +29,24 @@ python3 run.py
   <li> <a href="http://www.sls.hawaii.edu/bley-vroman/brown_corpus.html">Data link</a></li>
   <li> Line level in txt file format</li>
   <li>Handwritten generated from text file in form format as image (png extention)   <a href="https://10015.io/tools/text-to-handwriting-converter"> used tool </a></li>
-</ol>   
-  </li>
-  
+  </ol>   
+  </li>  
 </ul>  
 
-<h2>Hungarain Corpus for 60GB </h2>
-
+<h2> Hungarain Corpus for 60GB </h2>
 <ol>
   <li> <a href="https://data.statmt.org/cc-100/hu.txt.xz">Data link</a> </li>
   <li> Big data text (Corpus) siplited to small text files each one with 5000000 lines </li>
   <li>link to data (later on cloud) </li>
 </ol> 
 
-
 <h2>File Size small Comparession </h2>
 <p>At this point I am doing small comparession for <a href="https://huggingface.co/datasets/AlhitawiMohammed22/SROIE_2019_text_recognition23/blob/main/test.jsonl"> Test set from SROIE </a>by converting them to differnt data format using <a href = "https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/jsonl_to_parquet.py">script</a> </p>
 <ol>
-  <li> The data format in CSV give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/csv_out.csv">974 KB</a> </li>
-  
+  <li> The data format in CSV give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/csv_out.csv">974 KB</a> </li>  
   <li> The data format in jsonl  give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/test.jsonl">1432 KB </a>   </li>
   <li> The data format in parquet give size <a href ="https://github.com/Mohammed20201991/MFileSiplite/blob/main/size_comparession/out.parquet.csv">808 KB</a> </li>
-  
-  <li> To Sumup the above comparession parquet format is more efficent way for saving BigData  </li>
-  
+  <li> To Sumup the above comparession parquet format is more efficent way for saving BigData  </li>  
 </ol> 
 
 <h2>How to convert Text & Jsonl file and Pandas to Parquet format<a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/jsonl_to_parquet.py"> Script </a> </h2>
@@ -86,12 +80,12 @@ For <a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/p
 python3 process_missing.py path/to/data_source
 ~~~
 
-To <a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/random_choice.py"> Choice Random randomly  </a> samples from generated data:
+To <a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/random_choice.py"> Choice randomly</a> samples from generated data:
 ~~~bash
 python3 random_choice.py
 ~~~
 
-To <a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/make_one_data.py"> Mearge two differnt datasets  </a>:
+To <a href="https://github.com/Mohammed20201991/MFileSiplite/blob/main/JupLab/make_one_data.py"> Merge two differnt datasets </a>:
 ~~~bash
 python3 make_one_data.py
 ~~~
@@ -108,3 +102,5 @@ python3 zipFile.py
 - <a href="https://fki.tic.heia-fr.ch/databases/washington-database">washington-database</a>
 - <a href="https://fki.tic.heia-fr.ch/">IAM database</a>
 - <a href="https://paperswithcode.com/dataset/sroie">SROIE</a>
+
+Email: Mohamedabid092@gmail.com
